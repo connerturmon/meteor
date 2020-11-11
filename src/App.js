@@ -1,29 +1,16 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { lockCharacter, unlockCharacter } from './actions/characterActions';
-import { CAPTAIN_INTERNAL_ID } from './common/characterConstants';
+import SaveUploader from './components/SaveUploader';
+import SaveDownloader from './components/SaveDownloader';
+import Characters from './components/Characters';
+import Skins from './components/Skins';
 
 function App() {
-  const characters = useSelector(state => state);
-  const dispatch = useDispatch();
-
-  const toggleCharacterUnlock = character => {
-    if (characters[character].unlocked) dispatch(lockCharacter(character))
-    else dispatch(unlockCharacter(character));
-  }
-
-  return (
+return (
     <div className="App">
-      {
-        Object.values(characters).map(function(character) {
-          return (
-            <div className="character">
-              <p>{character.unlocked ? `${character.name}: Unlocked` : `${character.name}: Locked`}</p>
-              <button onClick={() => toggleCharacterUnlock(character.internal_id)}>Toggle</button>
-            </div>
-          )
-        })
-      }
+      <SaveUploader />
+      <SaveDownloader />
+      <Characters />
+      <Skins />
     </div>
   );
 }
